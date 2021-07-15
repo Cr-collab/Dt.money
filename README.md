@@ -75,7 +75,43 @@ O dt.money é um projeto que vai gerir os gastos de uma pessoa baseada na entrad
       * public 
          * index.html
          * favicon.png
-          
+
+------ 
+
+# Aula 3 - Instalando Styled Components
+
+Uma das estrategias mais utilizadas pelo React JS e React Native e otros frameworkd do fronternd é "css in js".
+
+`` O que é CSS IN JS ?``
+
+Se formaos traduzir para portugues o seignificado é css dentro do javascript.
+
+--------------------------------
+Inicialmente vamos comparar o modo com fazemos no css para depois fazer a comparação com css in js.
+  * inicialmente criamos arquivo css no assets 
+    * fazemos nossa estilização 
+    * depois importamos no arquivo js 
+    * adicionamos a nossa estilização atráves de seltores  no nosso componente
+---
+* Primiro passo instalar uma blibioteca de css in js que é Styled-Components umas das mais utilizadas para essa estrategia.
+   * comando para instalar Styled-Components :
+      * ``npm add styled-components ``
+      * depois importamos no arquivo js o nosso styled components   `` import styled from styled-components ``
+      * após o import perceberemos que a nossa importação esta dando erro, por que ?
+        * porque o arquivo principal do styled components  esta separado do seu arquivo de tipagem typescript.
+        * instalar arquivo de tipagem typescript.
+         * comando : `` npm add @types/style-components ``
+         * prontinho erro arumado.
+   *    vamos criar um components estilizado :
+      * `` const Title  =  styled.h1` color: #red ` ``
+      * agora para aplicar o nosso style fazemos isso :
+      * `` < Title> Hello World </Title>``
+   * `` Vantagens do Styled Components é que ele suporta encadeamento de estilos , Estilazação por escopo em tão não razão para um css sobrescrever o outro  `` 
+   * CSS Scoped- a classes css do nosso são gerados diferente para não sobescrever as outras.  
+      
+              
+      
+
 
 
 
