@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# Sobre o dt.money 
+ ## Tela  Principal.
+ ![Captura de tela 2021-07-15 094302](https://user-images.githubusercontent.com/65018066/125789905-c1730dad-7208-402a-8f6b-4d0b83f4a6f1.png)
+## Tela de Cadastro de despesas e ganhos.
+ ![Captura de tela 2021-07-16 094424](https://user-images.githubusercontent.com/65018066/125790165-cc6449a6-aaf9-42ba-9cf3-ed10696930a9.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Desnselvolveu o template foi o Thiago  Luchtenberg  UI da Rocketseat 
+---
 
-## Available Scripts
+O dt.money é um projeto que vai gerir os gastos de uma pessoa baseada na entrada do dinheiro e na saida para ver o patrimonio liquido da pessoa.
 
-In the project directory, you can run:
+* Cadastro de novas transações 
+ * no formulario o usario vai ?
+   *  Nome da Transação 
+   * o Preço da transação 
+   * vai poder escolher se a transação
+    é uma entrada ou uma saida.
+   * escolhera a Categoria da transação  
 
-### `npm start`
+---   
+# 1 Aula : Configurando a estrutura do nosso projeto 
+* Vamos utilizar para nossa estrutura o create react app
+  *  O que é o create react app ?
+      * è basicamente uma estrura pronta do projeto react, para agente se preocupar somente com o código e não  com restante das configuraçãoes do nosso projeto por exemplo o webpack.
+      * como criar essa etrurura ?
+        *  atráves do terminal pelo comando :`` npx create-react-app {nome do seu projeto }``
+* criando a estrutura do dt.money :
+  * primeiro passo : `` npx create-react-app dtmoney --template typescript``      
+     * por que usar ``--template typescript``:
+       * por que por padrão o a criação do nosso template vai ser usando javascript dessa forma deixamos bem claro que estamos querendo utilizar um template typescript.
+* Analisando a estrutura de paginas do create react app
+  * node_modules
+  * public/ > deixar só index.html 
+  * src/ 
+    * deixar arquivos 
+     * App.tsx
+     * index.tsx
+     * react-app-env.d.ts
+       * se agente deletar ele vai criar novamente, ele serve para trazer umas tipagens do javascript .
+  * .gitignore
+  * package.json
+  * Readme.md
+  * tsconfig.json
+  * npm.lock 
+----
+  `` por que criar criar com exports e não com exports default ? ``
+   por que quando eu uso o export default que difine o nome do componenete não é que ta exportando e sim que ta importando, se usar o export que ta usando aquele componenete por padrão não pode definir um nome.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+----
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`` Outro ponto importante é que as configurações do webpack e do babel não estão na raiz, essa configuração fica dentro do pacote instalado pelo create react app que se chama react-scripts  por isso se analisar os scripts de colocar em ambiente de desenvolvimento e de produção e de fazer o build da nossa aplicação ele estão chamando react-scripts , toda configuração fica dentro desse carinha ``
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+"se eu executar scripts eject ele vai trazer toda a configuração do nosso projeto para dentro da raiz e ele não tem mais volta, qual desvantagem de ficar atualizando tudo na mão , bem diferente de atualizar o só react-scprit que vai fazer todo trabalho pra gente"
 
-### `npm run build`
+* package.json
+ * dividir as dependecies que estão em tudo em lugar
+  uma parte para devdependecies.
+  
+  `` denpedencias que ficaram o resto é tudo  denpedencias de desenvolvimento :       "dependencies": { "react": "^17.0.1","^react-dom": "17.0.1","react-scripts": "4.0.1",  "web-vitals":"^0.2.4"}``
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
