@@ -60,6 +60,23 @@ O dt.money é um projeto que vai gerir os gastos de uma pessoa baseada na entrad
   
   `` denpedencias que ficaram o resto é tudo  denpedencias de desenvolvimento :       "dependencies": { "react": "^17.0.1","^react-dom": "17.0.1","react-scripts": "4.0.1",  "web-vitals":"^0.2.4"}``
 
+  -----
+  # Aula 2 - Exportando assets do Figma
+    Vamos baixar os arquivos svg para nossa aplicação ,
+    na pasta src vai ficar assim
+    * src
+     * assets 
+        * close.svg
+        * income.svg
+        * logo.svg
+        * outcome.svg
+        * total.svg
+      nas pasta public vamos adicionar o favincon
+      * public 
+         * index.html
+         * favicon.png
+          
+
 
 
 
