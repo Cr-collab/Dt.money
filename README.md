@@ -264,7 +264,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
                border-radius: 0.25rem;
                height: 3rem;
 
-               transition: filter 0.2s;
+               transition: filter 0.
 
                 &:hover {
                 filter: brigthness(0.9);
@@ -272,27 +272,148 @@ Vamos começar  a  criar  nosso components , passo a passo:
 
            }
            
-          
-
-           
+                   
         `
       ~~~
+----------------------
+# Aula 2 -  Componente Sumary
 
- * 
- *
- *
- *
- * 
- *
- * 
+* Na pasta ``components`` .
+   * Criar pasta ``Dashboard``
+       * Criar `` index.tsx ``
+        ~~~ javascript
+         import { Container } from './styles'
+         import {Sumary} from '../Sumary'
+           export function Dashboard()
+             { 
+                return(
+                     <Container>
+                     </Sumary>
+                     </Container>
+                ) 
+             }
+        ~~~
+      * Criar `` style.ts``
+        ~~~ javascript
+           import styled from 'styled-components'
+           export const Container =  styled.main`
+                max-width: 1120px;
+                margin: 0 auto;
+                padding: 2.5rem , 1rem;
 
+           `
+        ~~~
+       
+------------------------------------------------------------------------------
 
+* Na pasta ``components`` .
+   * Criar pasta ``Sumary``
+      * Criar `` index.tsx ``
+         ~~~ javascript
+          import { Container } from './styles';
+          import incomeImg from '../../assets/income.svg'
+          import outcomeImg from '../../assets/outcome.svg'
+          import totalImg from '../../assets/total.svg'
 
-             
-              
-      
+          export function Sumary (){
+            return (
 
+                <Container>
+                    <div>
+                       <header>  
+                           <p>Entradas</p>
+                          <img src={incomeImg} alt="Entradas">
+                     </header>
+                     <strong>R$ 1.000</strong>
+                    </div>
 
+                    <!--  -->
+
+                    <div>
+                       <header>  
+                           <p>Saidas</p>
+                          <img src={incomeImg} alt="Saidas">
+                     </header>
+                     <strong>R$ 500</strong>
+                    </div>
+
+                    <!--  -->
+
+                    <div className="highlight-background">
+                       <header>  
+                           <p>Total</p>
+                          <img src={totalImg} alt="Total">
+                     </header>
+                     <strong>R$ 500</strong>
+                    </div>
+
+                </Container>
+
+            )
+          }
+        ~~~
+      * Criar `` style.ts``
+         ~~~ javascript
+         import styled from ' styled-components';
+
+         export const Container = styled.div`
+         display:grid;
+         grid-template-colluns: repeat(3 1fr);
+         gap: 2rem;
+         margin: -10px;
+
+         div { 
+           background: var(--shape);
+           padding: 1.5rem 2rem;
+           border-radius: 0.25rem;
+           color: var(--text-title);
+
+                header { 
+
+                display: flex;
+                align-itens: center;
+                justify-content: space-between;
+                       }
+
+                       strong { 
+                         display: block;
+                         margin-top: 1rem;
+                         font-weight: 500;
+                         font-size: 2rem;
+                         line-height: 3rem;
+                       }
+
+                       &.highlight-background {
+                         background: var(--green);
+                         color: #FFF;
+                       }
+         }
+
+       
+
+         `
+          
+         ~~~
+
+--------- -----------------------
+ * App.tsx
+   ~~~ javascript
+    
+    import { Header } from './components/Header'
+    import { GlobalStyle } from './styles/global'
+    import { Sumary } from './components/Sumary'
+
+    export function App(){
+      return (
+        <>
+           <Header/>
+           <Dashboard/>
+           <GlobalStyle/>
+        </>
+      )
+    }
+ 
+   ~~~         
 
 
 
