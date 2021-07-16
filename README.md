@@ -18,6 +18,10 @@ O dt.money é um projeto que vai gerir os gastos de uma pessoa baseada na entrad
    * escolhera a Categoria da transação  
 
 ---   
+----------------------------------------------------------------
+# Modulo 1
+---------------
+
 # 1 Aula : Configurando a estrutura do nosso projeto 
 * Vamos utilizar para nossa estrutura o create react app
   *  O que é o create react app ?
@@ -109,7 +113,7 @@ Inicialmente vamos comparar o modo como fazemos no css para depois fazer a compa
    * `` Vantagens do Styled Components é que ele suporta encadeamento de estilos , Estilazação por escopo em tão não razão para um css sobrescrever o outro  `` 
    * CSS Scoped- a classes css do nosso são gerados diferente para não sobescrever as outras.  
    ----------------------------------------------------------------
-   # Aula 3 - Criando stilos Globais 
+   # Aula 4 - Criando stilos Globais 
 
 
   Vamos aprender como criar estilização globais com styled components , então vamos criar estilização de fonts , background,são coisas que não são de um components especifico mais de toda aplicação e agente chama isso de estilos globais.
@@ -155,6 +159,135 @@ Inicialmente vamos comparar o modo como fazemos no css para depois fazer a compa
          * utilizando o GlobalStyle :
            * vamos no arquivo App.tsx:
             `` import { GlobalStyle } from './styles/global';  export function App(){ return ( <div> <h1> Hello World </h1> < GlobalStyke/>// assim que importa o style components criado </div> )}``
+----------------------------------------------------------------
+# Aula 5  - Fontes do Google Fonts
+----------------------------------------------------------------
+Vamos configurar uma Fonte customizada no nosso projetos:
+fontes disponivel no goohle fonts >  
+Fonte poppins regular 400 e Semi-bold 600 :
+
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+`` adicionar bem no inicio  por que ? vai abri uma conexão com cdn da google que entrega  os arquivos da fontes para gente , ele vai deixar essa conecxão pré aberta par ser muito mais rapido,
+vai ser excutado antes de tudo    ``
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> ``    
+
+vamo  no arquivo global do css adicionamos um novos estilos globais:
+ ``` body, button , textarea, input { font-family: Poppins, sans-serif; font-weight: 400; } ``
+ `` h1,h2,h3,h4,h5, strong { font-weight: 600; } ``
+ * por que eu não coloquei só no body ? 
+   *por que por padrão o utton , textarea, input eles não importão o estilo do body 
+   eles tem sua propria fonte dessa forma eu sobescrevo todos eles.
+
+
+----
+----------------------------------------------------------------
+# Modulo 2
+----------------------------------------------------------------
+
+## Aula 1 -  Componente Header
+----------------------------------------------------------------
+Vamos começar  a  criar  nosso components , passo a passo:
+ * Primerio passo cria na pasta `` src `` ourta pasta dentro dela que é a pasta `` components ``.
+    * e dEntro da pasta `` components `` vamos criar uma pasta ``Header``
+       * Dentro de `` Header `` vamos criar um arquivo `` index.tsx``
+          * dentro do arquivo `` index.tsx``, codigo  abaixo:
+          ~~~javascript
+          import logoImg from '../../../assets/logo.svg'
+          import {Container} from './styles'
+          
+           export function Header(){
+              return (
+                <Container>
+                  <Content>
+                    <img src-"{logoImg}" alt="dt money" >
+                    <button>
+                      Nova Transação 
+                    </button>
+                  </Content>
+                <Container/>
+              )
+            }
+          ~~~
+
+          * vamos ao arquivo ``App.tsx``, e vamos importar nosso header:
+
+          ~~~javascript
+           import {Header , Content} from "./components/Header";
+           import { Global } from "./styles/global";
+
+           export function App(){
+              return (
+                <>
+                      /* vou utilizar o tag fragment que é uma tag sem conteudo, por 
+                      que se deixarmos uma div poder atrapalhar nosso layout  */
+                 <Header />
+                 <GlobalStyle/> //Meu estilo de css global 
+                   
+                </>
+              )
+            }
+          ~~~
+
+       *  Dentro do `` Header `` vamos criar um arquivo `` styles.ts``
+      ~~~javascript
+
+          /*  por que não estamos utilizando styled-components dentro do arquivo index.tsx ?
+               por que nossos estilos ficar muito grande e como queremos deixar a nossa aplicação organizada e de facil manutenção essa m,elhor forma 
+          */
+         import styled from "styled-components"
+
+         export const Container = styled.header`
+              background: var(--blue)
+
+         `
+
+        export const Container = styled.div`
+         
+           max-width: 1120px;
+           /* vamos colocar um largura maxima para termos espaço para centralizalo*/ 
+           margin: 0 auto;
+
+           padding: 2rem 1rem 12rem;
+
+           display: flex;
+           align-center: center;
+           justify-content : space-between;
+
+
+           button{
+               font-size: 1rem;
+               color: #FFF;
+               background: var(--blue-light);
+               border: 0;
+               padding: 0 2rem;
+               border-radius: 0.25rem;
+               height: 3rem;
+
+               transition: filter 0.2s;
+
+                &:hover {
+                filter: brigthness(0.9);
+           }
+
+           }
+           
+          
+
+           
+        `
+      ~~~
+
+ * 
+ *
+ *
+ *
+ * 
+ *
+ * 
+
+
+
              
               
       
