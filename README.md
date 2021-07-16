@@ -87,7 +87,7 @@ Uma das estrategias mais utilizadas pelo React JS e React Native e otros framewo
 Se formaos traduzir para portugues o seignificado é css dentro do javascript.
 
 --------------------------------
-Inicialmente vamos comparar o modo com fazemos no css para depois fazer a comparação com css in js.
+Inicialmente vamos comparar o modo como fazemos no css para depois fazer a comparação com css in js.
   * inicialmente criamos arquivo css no assets 
     * fazemos nossa estilização 
     * depois importamos no arquivo js 
@@ -108,7 +108,54 @@ Inicialmente vamos comparar o modo com fazemos no css para depois fazer a compar
       * `` < Title> Hello World </Title>``
    * `` Vantagens do Styled Components é que ele suporta encadeamento de estilos , Estilazação por escopo em tão não razão para um css sobrescrever o outro  `` 
    * CSS Scoped- a classes css do nosso são gerados diferente para não sobescrever as outras.  
-      
+   ----------------------------------------------------------------
+   # Aula 3 - Criando stilos Globais 
+
+
+  Vamos aprender como criar estilização globais com styled components , então vamos criar estilização de fonts , background,são coisas que não são de um components especifico mais de toda aplicação e agente chama isso de estilos globais.
+  
+ * colocar o favicom na nossa pagina html , pagina html esta na pasta public.
+    * ``<link rel="shortcut icon" href="favicon.png" type="image/png">``
+ * vamos criar a nossos estilos globais, vamos fazer passo a passo:
+   * primeiro vamos na pasta ``src``   e dentro dela  criar a pasta ``styles`` e dentro dele ``global.ts``  
+    * dento de global.ts vamos codar nosso estilo global:
+     * vamos importar de dentro styled components a função `` createGlobalStyle ``:
+       * codigo completo de importação : `` import { createGlobalStyle } from 'styled-components'  ``
+     *  vamos criar uma variavel ``GlobalStyle`` com letra maiscula porque futuramente essa variavel vai ser convertido para componente react. depois disso colocamos o operador de atribuição e isso chamamos a função importada de style-components que no caso é o `` createGlobalStyle ``  e encostado nessa função declaramos um template string.
+     codigo resultado dessas ações:
+      `` import { createGlobalStyle } from 'styled-components'   const GlobalStyle =  createGlobalStyle` #aqui{ vem : codigo css } `  ``
+     * Vamos da um export antes da nossa variavel GlobalStyle para que tenhamos acesso a ela depois,  codigo resultado dessas ações: `` import { createGlobalStyle } from 'styled-components'  export  const GlobalStyle =  createGlobalStyle` #aqui{ vem : codigo css } `  ``
+
+     * estilização globa dentro da variavel `` GlobalStyle `` os codigo css:
+     `` :root { --background: #f0f2f5 } * { margin: 0; padding:0; box-sizing: border-box; } body{ background: var(--background); --webkit-font-smoothing: antialiased; }   ``
+         * --webkit-font-smoothing: antialiased -> Vai deixar a fontes mais nitidas no navegadores que usam engine do chrome por debaixo dos panos.
+         * Configurar o Tamnho de font da nossa aplicação.
+            * por padrão  o tamanho de fonte da nossa aplicação e de 16px o tamanho ideal para desktop.
+            * na tag html vamos adicionar uma estilização :
+             `` @media (max-width: 1000px) { font-size: 93.75% } ``
+               * font-size: 93.75% isso aqui vai dar 15px é so fazer calculo baseado no valor padrão `` 16 * 0,9375``
+            `` @media (max-width: 720px) { font-size: 87.5% } ``  
+               * font-size: 87.5% isso aqui vai dar 14px é so fazer calculo baseado no valor padrão `` 16 * 0,875``
+             *  por que diminuir a fonte ?
+                *  primeiro obviamente em dispositivos menores a fonte tem que ser menor.
+                *  segundo vamos utilizar uma medida do css chamada REM . 
+                   * o que REM ?
+                      * 1 rem igual ao tamanho do font-size da nossa pagina, ou seja dependendo do tamanho da tela ele vai se adaptar ajudando na adaptabilidade da nossa aplicação.
+                * terceiro ponto.
+                   * por que utilizar porcentual e não pixels?
+                     *  caso o  usuario   esteja com a configuração de aumentar a fonte, ou percentual vai  aumentar dependo da configuração do usuario. 
+             * Configuração do button:
+               `` button{ cursor: pointer; } ``
+             * tags disabiltadas:
+               * `` [disabled]{ opacity: 0.6; cursor: not-allowes; } ``  
+                 * cursor: not-allowes; -> o button vai ficar com a plaquinha de não fume;
+             * adicionando variavel de cor no root:
+               * `` :root { --background: #f8f2f5; --red: #E52E4D; --blue: #5429CC;  --blue-light: #6933FF; --text-title: #363F5F; --text-body: #969CB3; --shape: #FFFFFF;} ``    
+         --------------------------------
+         * utilizando o GlobalStyle :
+           * vamos no arquivo App.tsx:
+            `` import { GlobalStyle } from './styles/global';  export function App(){ return ( <div> <h1> Hello World </h1> < GlobalStyke/>// assim que importa o style components criado </div> )}``
+             
               
       
 
