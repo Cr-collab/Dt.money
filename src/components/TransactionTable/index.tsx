@@ -7,7 +7,7 @@ export function TransactionTable(){
            fetch('http://localhost:3000/api/transaction')
            .then(response => response.json())
            .then(data => {console.log(data)})
-           /** forma que fizemos no capitulo 1   */
+          
     }, [])
 
     return (

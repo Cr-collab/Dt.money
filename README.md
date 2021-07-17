@@ -536,9 +536,14 @@ Vamos começar  a  criar  nosso components , passo a passo:
  -------------------------   
   
  #  Configurando MirageJS
+ -----------
 
- forma que fizemos no capitulo 1  
-        *fazendo o fetch da nossa API.
+
+  forma que fizemos no capitulo 1 
+
+        * fazendo o fetch da nossa API.
+         --------------------------------
+
               ~~~javascript
                                   
                   export function TransactionTable(){
@@ -551,9 +556,40 @@ Vamos começar  a  criar  nosso components , passo a passo:
                       }, [])
               ~~~
         
-        * por enquanto não esta retornadno nada vamos fazer o que  ? 
-            *  * instalar mirage js npm add miragejs 
-            * importar no index.tsx  que renderiza a nossa a funçaõ import { createServer } from 'miragejs'
+* por enquanto não esta retornadno nada vamos fazer o que  ? 
+    *  * instalar mirage js ```npm add miragejs `` 
+      * Configurando nosso server com miragejs, no index.tsx de renderização
+         ~~~~javascript 
+             import React from 'react';
+             import ReactDOM from 'react-dom';
+             import { createServer } from 'miragejs'
+
+                          
+
+              createServer({
+                routes(){
+                  this.namespace = 'api'; // aqui vai inteceptar a rota que tiver api na sua url 
+
+                  this.get('/transaction', ()=>{// caso faça uma requisiçao get eu to reornando um array de objetos
+                    return [
+                      {
+                        id: 1,
+                        title: 'Transaction1',
+                        amount: 400,
+                        type: 'deposit',
+                        category: 'Food',
+                        createsAt: new Date()
+
+
+                      }
+
+                    ]
+                  })
+                }
+              })
+              
+         ~~~~ 
+        'miragejs'
            * usar a função create server  
            
 
