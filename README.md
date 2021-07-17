@@ -474,7 +474,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
       * styles.ts
           ~~~ javascript
           import styled from 'styled-components';
-          
+
               export  const Container = styled.div`
                       margin-top: 4rem;
 
@@ -515,6 +515,50 @@ Vamos começar  a  criar  nosso components , passo a passo:
               `
                         
          ~~~
+
+-------------------------------------------
+    # Criando front-end sem back-end
+                              Agora que agente terminou  uma boa parte visual da nossa aplicação a gente teria que fazer ela funcionar realmente os dados virem de alguma API de um banco de dados eu consegui cadastrar novas transações e essas transações ficarem persistidas para a gente conseguir ter acesso a ela depois, ou seja, a gente precisa realmente fazer aplicação realmente funcionar. Nesse momento a gente vai fazer a conexão com  back-end da nossa aplicação.
+                        então na maioria das vezes a gente vai ter um back-end uma API REST ou API  graphql  que vai servir dados para  o nosso front-end vai então listar esse dados, cadastrar novos dados na API e tudo mais .
+                        Nessa aplicação exatamente em trabalhar como  não tendo back-end pronto.
+                        Isso acontece muito no  ambiente de trabalho.
+                        Um exemplo temos dois times um trabalhando com front-end e outro com back end. pode acontecer de o front-end Ter entregue uma featured ,   o back end ainda não ter entregue a
+                        api para fazer os testes no front-end.
+                        Então não é recomendável deixarmos o  Front-end  estático  porque consumir uma aí   API
+                        é totalmente diferente então é melhor deixar preparado com uma ferramenta que simula uma api. 
+
+                        JSON SERVER  
+                                  O que o JSON SERVER FAZ ?
+                                          o  json server faz basicamente  permite que ao gente criar um arquivo json com  uma estrutura de um objeto cada chave  do objeto ele vai coverter em uma rota da nossa aplicação então como a posts é uma propriedade que armazena um  array,  ele vai entender automaticamente que essa propriedade aqui armazena um array de posts e vai criar pra gente todo  um crud  , vai criar uma estrutura para agente criar um novo post e deletar , e atualizar, listar.        
+                        Mirage 
+                                    Tem mais funcionalidades.
+
+ -------------------------   
+  
+ #  Configurando MirageJS
+
+ forma que fizemos no capitulo 1  
+        *fazendo o fetch da nossa API.
+              ~~~javascript
+                                  
+                  export function TransactionTable(){
+
+                      useEffect(()=>{
+                            fetch('http://localhost:3000/api/transaction')
+                            .then(response => response.json())
+                            .then(data => {console.log(data)})
+                            
+                      }, [])
+              ~~~
+        
+        * por enquanto não esta retornadno nada vamos fazer o que  ? 
+            *  * instalar mirage js npm add miragejs 
+            * importar no index.tsx  que renderiza a nossa a funçaõ import { createServer } from 'miragejs'
+           * usar a função create server  
+           
+
+
+
      
       
 
