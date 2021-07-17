@@ -1,9 +1,11 @@
 import { Sumary } from '../Sumary'
-import {Container} from './style'
+import { TransactionTable } from '../TransactionTable'
+import { Container } from './style'
 export function Dashboard(){
     return(
          <Container>
               <Sumary/>
+              <TransactionTable/>
          </Container>
     )
 }

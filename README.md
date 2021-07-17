@@ -413,7 +413,113 @@ Vamos começar  a  criar  nosso components , passo a passo:
       )
     }
  
-   ~~~         
+   ~~~       
+
+
+   ----------
+   # aula 3  -   Componente: TransactionsTable
+
+   * Criar pasta TransactionTable.tsx
+      * index.tsx
+           ~~~ javascript
+           import { Container } from "./style";
+
+          export function TransactionTable(){
+
+              return (
+              import { Container } from "./style";
+
+                export function TransactionTable(){
+
+                    return (
+                    
+                        <Container>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th> Titulo </th>
+                                        <th> Valor </th>
+                                        <th> Categoria </th>
+                                        <th> Data </th>        
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+
+                                    <td>Densenvolvimento de website</td>
+                                    <td className="deposit">R$ 12.0000 </td>
+                                    <td >Densenvolvimento </td>
+                                    <td>20/12/2021 </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                    <td>Aluguel </td>
+                                    <td className="withdraw"> - R$ 1.0000 </td>
+                                    <td>Casa </td>
+                                    <td>21/12/2021 </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Container>
+
+                    ) 
+
+                }
+           ~~~
+      * styles.ts
+          ~~~ javascript
+          import styled from 'styled-components';
+          
+              export  const Container = styled.div`
+                      margin-top: 4rem;
+
+                      table{ 
+                          width: 100%;
+                          border-spacing: 0 0.5rem ;
+
+                          th{ 
+                              color: var(--text-body);
+                              font-weight :  400;
+                              padding: 1rem 2rem;
+                              text-align: left;
+                              line-height: 1.5rem;
+                          }
+
+                          td{ 
+                              padding: 1rem 2rem;
+                              border: 0;
+                              background: var(--shape);
+                              color: var(--text-body);
+                              border-radius: 0.25rem;
+
+                              &:first-child{
+                                  color: var(--text-title); 
+                              }
+
+                              &.deposit{
+                                  color: var(--green);
+                              }
+
+                              &.withdraw {
+                                  color: var(--red);
+                              }
+                          }
+                        
+                      }
+
+              `
+                        
+         ~~~
+     
+      
+
+
+
 
 
 
