@@ -676,9 +676,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
                   <Container/>
                 )
               }
-            ~~~
-
-      /*  
+     { /*  
          será que o modal ele deveria esta no header?
          Assim como modal ele ocupa a pagina toda concerteza não o modal é outro componente ,
          ele deveria ficar na pagina principal.
@@ -687,7 +685,53 @@ Vamos começar  a  criar  nosso components , passo a passo:
          o repasse de propriedades para nosso components, vou fazer o modal fazer parte da nossa aplicação e não do cabeçalho em si. 
          no caso o header é só responsavel  por abrir o modal. 
          o modal não faz parte do nosso conteudo do nosso Header ,  o que agentre vai fazer a gente vai migrar o nosso modal para dentro da nosso arquivo app onde centraliza os nossos components en cima do globalstyle 
-      **/      
+      **/ }     
+   ~~~
+
+ 
+      --------------
+      # Componente: NewTransactionModal
+      --------------------------------
+Nessa aula vamos trabalhar na estrutura doi nosso modal , para não acabar ficando muito conteudo dentro do nosso proprio app vamos criar um componente para nosso modal.
+* vamos criar uma pasta NewTransactionModal 
+* vamos criar um arquivo index.tsx
+~~~javascript 
+import Modal from 'react-modal'
+      interface NewTransactionModalProps {
+        isOpen: boolean;
+        onrequestClose: ()=> void;
+      }
+
+export function NewTransactionModal({isOpen , onRequestClose} = NewTransactionModalProps){
+  return (
+                  <Modal isOpen={isOpen}  onRequestClose={onRequestClose}>
+                      {/* se eu testar na aplicação , vai abrir o modal mais não vai fechar ,
+                      para fechar precisaremos passar para nosso modal a propriedade onRequestClose
+                      passando nossa função  */}
+                          <h2> Cadastrar Nova transação  </h2>
+                      </Modal>
+                      {/* O modal pode ir em qualque lugar */}
+   
+  )
+}
+~~~
+
+* vamos criar um arquivo style.ts
+~~~javascript
+
+import styled from 'styled-components'
+
+export const Container = styled.div`
+`
+{/*
+   Um conceito que vamos uilizar muito é o conceito de deixar algumas informção que seream compartilhas com mais com componentes em componente que esta acima dos demais. como do modal e do header , que precisam das mesmas informações.
+*/}
+~~~
+----------------------------------------------------------------
+
+
+
+
 
                   
 
