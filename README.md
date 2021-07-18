@@ -589,8 +589,114 @@ Vamos começar  a  criar  nosso components , passo a passo:
               })
               
          ~~~~ 
-        'miragejs'
-           * usar a função create server  
+  ----------------------
+# Configurando Cliente HTTPS  para agente não utilizar o fetch que api nativa 
+
+* por que não utilzar o fetch ?
+  * Primreio por que o fetch tem que colocar todo endereco em cad requisição que fizermos  
+  * trasformar a nossa requisoção em json toda vez que agente faz uma requisição 
+*por que utilizar a blibioteca de requisição AXIOS ?
+   agente consegue interceptar requisição e resposta para nossa api.
+   ou seja eu consigo adicionar uma regra no axios que cada requisção que eu envie para o nosso back-end eu consiga interceptar antes de chegar no backend e mudar algun dado, enviar algun token de autenticação  para enviar alguma informação que eu tenha aqui na minha aplicação e também nas respostas interceptar todas respostas que chegam na minha aplicação, para fazer tratamentos de erros.
+
+   * instalar o AXIOS : `` npm add axios `` 
+    * criar pasta para axios vai se  chamar ``services``
+      * criar dentro de `` services `` o arquivo ``api.ts``
+      * ~~~~javascript
+            import axios from "axios"
+
+            export const api = axios.create(
+              // criar algumas informção padrões que vão ser igual para toda nossas requisiçãoe 
+              baseURL: 'http://localhost:3000/api'
+            )
+        ~~~~ 
+
+         * fazendo o requisição  da nossa API com axios.
+         --------------------------------
+
+    ~~~javascript                      
+                  export function TransactionTable(){
+                    useEffect(()=>{
+
+                      api.get(('/transaction')=>{
+                            .then(data => {console.log(data);   
+                      }, [])
+    ~~~ 
+                    }, [])
+ -----------------------------------------
+  # Aula Configurando Modal de criação 
+  -----------------------------------------
+    O que agente vai fazer nessa aula é começar configurar o nosso modal  para cadastrar uma nova transação, e para configurar esse modal agente vai usar uma biblioteca externa chamada  React-Modal, e qual é a vantagem de utilizar uma biblioteca externa para nosso modal?  
+  È por que já tem algumas funcionalidades prontas, por exemplo ao apertar a tecla esc a modal fecha , ou a clickar na parte escura da modal ela fechar, são varias funcionalidades que agente tentasse reproduzir levaria um tempo, como ja vem pronto é bem melhor para nossa produtividade.
+
+  Passo a passo para criar nossa react-modal?
+  Instalando a biblioteca: 
+  Comando para instalação via terminal:  ``npm add react-modal``   
+  Vamos criar nossa modal onde abriremos ela no caso o botão esta no header.
+  ~~~javascript
+            import logoImg from '../../../assets/logo.svg'
+            import {Container} from './styles'
+            import Modal from 'react-modal'; 
+            /* como ja criamos nosso estado e nossa funções que vão setar o estado dependendo de qu querer fechar o meu modal ou não esta na hora de importar a nossa modal
+            vai dar um erro de tipagem com typescript 
+            é so instalar a npm add @types/react-modal  -D
+              
+            */
+
+            
+            export function Header(){
+                const    [isNewTrasactionModalOpen,setIsNewTrasactionModalOpen] = useState(false);
+                /// Aqui vai gardar o valor do nosso modal se ele esta aberto ou fechado 
+
+                function handleOpenNewTransactionModal (){
+                  setIsNewTransactionModalOpen(true);
+                }
+                function handleCloseTransactionModal (){
+                  setIsNewTransactionModal(false)
+                }
+
+                // um partner que eu uso é caso uma função que vais ser chamda dependendo de uma ação ele vai começar com handle -> que significa lidar com ;
+
+
+                return (
+                  <Container>
+                    <Content>
+                      <img src={logoImg} alt="dt money" >
+                      <button onClick={handleOpenNewTransactioModal} /* a primeira vez que eu clickar eu tenho que abria a modal por que por padrão ela esta fechada */>
+                        Nova Transação 
+                      </button>
+                      <Modal isOpen={isNewTrasactionModalOpen}  onRequestClose={handleCloseTransactionModal}>
+                      {/* se eu testar na aplicação , vai abrir o modal mais não vai fechar ,
+                      para fechar precisaremos passar para nosso modal a propriedade onRequestClose
+                      passando nossa função  */}
+                          <h2> Cadastrar Nova transação  </h2>
+                      </Modal>
+                      {/* O modal pode ir em qualque lugar */}
+                    </Content>
+                  <Container/>
+                )
+              }
+            ~~~
+
+      /*  
+         será que o modal ele deveria esta no header?
+         Assim como modal ele ocupa a pagina toda concerteza não o modal é outro componente ,
+         ele deveria ficar na pagina principal.
+
+         O que agente pode fazer nesses caso ? 
+         o repasse de propriedades para nosso components, vou fazer o modal fazer parte da nossa aplicação e não do cabeçalho em si. 
+         no caso o header é só responsavel  por abrir o modal. 
+         o modal não faz parte do nosso conteudo do nosso Header ,  o que agentre vai fazer a gente vai migrar o nosso modal para dentro da nosso arquivo app onde centraliza os nossos components en cima do globalstyle 
+      **/      
+
+                  
+
+  
+
+
+
+
+
            
 
 
