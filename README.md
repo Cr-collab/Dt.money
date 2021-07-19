@@ -942,8 +942,62 @@ Criando botões de Tipo
 
     `
  ~~~   
+---------------
+# Funcionamento dos Botões
+---------------
+O que agente vai fazer nessa aula é dar funcionalidades para botão de tipos de entrada e saida,
+então quando eu clickar neles quero que mantenha a informação de qual eu clikei e deixar uma cor de fundo para usuario saber qual doi selecionado.
 
+*  NewTransactionModal 
+* index.tsx
+~~~javascript 
+import Modal from 'react-modal'
+      interface NewTransactionModalProps {
+        isOpen: boolean;
+        onrequestClose: ()=> void;
+      }
 
+export function NewTransactionModal({isOpen , onRequestClose} = NewTransactionModalProps){
+    const [type . setType] = useState('deposit')
+    /* vamos criar  um estado para armaxenar  o tipo da transaction se é uma entrada ou uma saida */
+  return (
+                  <Modal isOpen={isOpen}  onRequestClose={onRequestClose} overlayClassName="react-modal-overlay"  {/* a propriedade do lado esquerdo ela atribui uma nova classe para overlay da nossa classe */ } className="react-modal-content" {/* a propriedade do lado esquerdo ela atribui uma nova formatação de estilo para conteudo da nossa modal que vamos passar esse estilo no nosso arquivo global*/} > 
+
+                     <Container> {/* Aqui no nosso container vamos ter nosso form assim matando dois coelhos com uma cajadada só  */}
+
+                          <h2> Cadastrar Nova transação  </h2>
+                          <input placeholder="Titulo">
+                             
+                        <TransactionTypeContainer>
+                            <RadioBox type="button" 
+                             onClick={()=>{ setType('deposit') }}
+                             isActive={type === 'deposit'}
+                            >
+                                <img src={incomeImg} alt="Entrada">
+                                <span> Entrada </span>
+                            <RadioBox/>
+
+                            <RadioBox type="button" 
+                            onClick={()=>{ setType('withdraw') }}
+                            isActive={type === 'withdraw'}>
+                                <img src={outcomeImg} alt="Saida">
+                                <span> Saida </span>
+                            <RadioBox/>
+                         <TransactionTypeContainer/>
+
+                          <input type="number" placeholder="Valor">
+                          <input placeholder="Categoria">
+
+                          <button type="submit">
+                               Cadastrar
+                          </button>
+                     </Container>
+                 </Modal>
+                 
+   
+  )
+}
+~~~
 
 
 
