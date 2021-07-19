@@ -692,7 +692,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
       --------------
       # Componente: NewTransactionModal
       --------------------------------
-Nessa aula vamos trabalhar na estrutura doi nosso modal , para não acabar ficando muito conteudo dentro do nosso proprio app vamos criar um componente para nosso modal.
+Nessa aula vamos trabalhar na estrutura do nosso modal , para não acabar ficando muito conteudo dentro do nosso proprio app vamos criar um componente para nosso modal.
 * vamos criar uma pasta NewTransactionModal 
 * vamos criar um arquivo index.tsx
 ~~~javascript 
@@ -728,6 +728,157 @@ export const Container = styled.div`
 */}
 ~~~
 ----------------------------------------------------------------
+   --------------
+      # Estrutura do formulário
+      --------------------------------
+Nessa aula vamos trabalhar na estrutura do Html do nosso Formulario .
+*  NewTransactionModal 
+* index.tsx
+~~~javascript 
+import Modal from 'react-modal'
+      interface NewTransactionModalProps {
+        isOpen: boolean;
+        onrequestClose: ()=> void;
+      }
+
+export function NewTransactionModal({isOpen , onRequestClose} = NewTransactionModalProps){
+  return (
+                  <Modal isOpen={isOpen}  onRequestClose={onRequestClose} overlayClassName="react-modal-overlay"  {/* a propriedade do lado esquerdo ela atribui uma nova classe para overlay da nossa classe */ } className="react-modal-content" {/* a propriedade do lado esquerdo ela atribui uma nova formatação de estilo para conteudo da nossa modal que vamos passar esse estilo no nosso arquivo global*/} > 
+
+                     <Container> {/* Aqui no nosso container vamos ter nosso form assim matando dois coelhos com uma cajadada só  */}
+
+                          <h2> Cadastrar Nova transação  </h2>
+                          <input placeholder="Titulo">
+                          <input type="number" placeholder="Valor">
+                          <input placeholder="Categoria">
+
+                          <button type="submit">
+                               Cadastrar
+                          </button>
+                     </Container>
+                 </Modal>
+                 
+   
+  )
+}
+~~~
+
+*  style.ts
+~~~javascript
+
+import styled from 'styled-components'
+
+export const Container = styled.form`
+  
+
+
+`
+
+~~~
+
+
+### Estilazação Global para nosso modal 
+------------
+~~~~javascript 
+ 
+  import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+
+.react-modal-overlay{
+    background: rgba(0, 0, 0, 0.5);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-itens: center;
+    justify-content: center;
+
+
+}
+
+.react-modal-content{
+
+   width: 100%;
+   max-width: 576px;
+   padding: 3rem;
+   position: relative;
+   border-radius: 0.24rem;
+
+}
+
+
+`
+
+~~~~
+
+
+----------------------------------------------------------------
+# Estilizando Modal 
+______________
+
+
+*  style.ts
+~~~javascript
+
+import styled from 'styled-components'
+
+export const Container = styled.form`
+  
+h2 {  
+  color : var(--text-title);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+input { 
+    width: 100%;
+    padding: 0 1.5rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+
+    border:  1px solid #d7d7d7;
+    background: #e7e9ee;
+
+    font-weight: 400;
+    font-size: 1rem;
+
+    &::placeholder {
+      margin-top: 1rem;
+    }
+
+    & + input {
+      margin-top: 1rem;
+    }
+}
+
+button[type="submit"] { 
+
+  width: 100%;
+  padding: 0 1.5rem;
+  height: 4rem;
+  background: var(--green);
+  color: #FFF;
+  border-radius: 0.25rem;
+  border: 0;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  transition: filter 0.2s;
+
+  &:hover{
+    filter: brigthness(0.9);
+  }
+
+}
+
+`
+
+~~~
 
 
 
