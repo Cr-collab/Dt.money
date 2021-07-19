@@ -880,6 +880,69 @@ button[type="submit"] {
 
 ~~~
 
+----------------------------------------------------------------
+Criando botões de Tipo
+----------------------------------------------------------------
+
+* index.tsx
+   ~~~javascript 
+      
+      <TransactionTypeContainer>
+              <button type="button">
+                  <img src={incomeImg} alt="Entrada">
+                  <span> Entrada </span>
+              <button/>
+
+               <button type="button">
+                  <img src={outcomeImg} alt="Saida">
+                  <span> Saida </span>
+              <button/>
+      <TransactionTypeContainer/>
+
+   ~~~
+
+* style.ts
+ ~~~javascript
+ 
+    export const TransactionTypeTable = styled.div`
+     margin: 1rem 0;
+     display:grid;
+     grid-template-colluns: 1fr 1fr;
+     gap : 0.5rem;
+
+     button{ 
+       height: 4rem;
+       border: 1px solid #d7d7d7;
+       border-radius: 0.25rem;
+       ]
+       background : transparent;
+       display: flex;
+       align-itens: center;
+       justify-content: center;
+
+       &:hover{
+         border-color: #aaa;
+       }
+
+       img {
+         width: 20px;
+         height: 20px;
+       }
+
+       span{ 
+         display: inline-block;
+         margin-left: 1rem;
+         font-size: 1rem;
+         color: var(--text-title);
+       }
+
+     }
+    `
+       
+
+    `
+ ~~~   
+
 
 
 
