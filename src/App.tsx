@@ -21,9 +21,16 @@ function handleCloseTransactionModal(){
 
   return (
     <>
-       <Header onHandleOpenNewTransactioModal={handleOpenNewTransactioModal}/>
+       <Header 
+       onHandleOpenNewTransactioModal={handleOpenNewTransactioModal}
+       />
+       
        <Dashboard/>
-       < NewTransactionModal  isOpen={isNewTrasactionModalOpen} onRequestClose={handleCloseTransactionModal}/>
+
+       < NewTransactionModal 
+        isOpen={isNewTrasactionModalOpen} 
+        onRequestClose={handleCloseTransactionModal}/>
+
        < GlobalStyle/>
     </>
   );

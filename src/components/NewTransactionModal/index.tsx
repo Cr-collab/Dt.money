@@ -30,12 +30,30 @@ export function NewTransactionModal({isOpen , onRequestClose} : NewTransactionMo
      }
 
      return(
-        < Modal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName="react-modal-overlay" className="react-modal-content" >
-          <button type="button" onClick={onRequestClose} className="react-modal-close">
-            <img src={closeImg} alt="Fechar Modal" />
+
+        < Modal 
+        isOpen={isOpen} 
+        onRequestClose={onRequestClose}
+        overlayClassName="react-modal-overlay" 
+        className="react-modal-content" 
+         >
+
+          <button 
+          type="button"
+          onClick={onRequestClose} 
+          className="react-modal-close"
+           >
+
+            <img 
+            src={closeImg} 
+            alt="Fechar Modal"
+             />
+
           </button>
+
           <Container onSubmit={handleCreateNewTransaction}>  
-              <h2> Modal Funcionou </h2>
+              <h2> Cadastrar Transações  </h2>
+
               <input
                 placeholder="Titulo"
                 value={title}
@@ -50,6 +68,7 @@ export function NewTransactionModal({isOpen , onRequestClose} : NewTransactionMo
                />
 
               <TransactionTypeContainer>
+
                   <RadioBox type="button" 
                    onClick={()=> setType('deposit')}
                    isActive={type === 'deposit'}
@@ -69,6 +88,7 @@ export function NewTransactionModal({isOpen , onRequestClose} : NewTransactionMo
                     <img src={outcomeImg} alt="Saida" />
                     <span>Saida</span>
                   </RadioBox>
+
               </TransactionTypeContainer>
 
               <input 
@@ -79,6 +99,7 @@ export function NewTransactionModal({isOpen , onRequestClose} : NewTransactionMo
               < button type="submit">
                 Cadastrar
               </button>
+
           </Container>  
 
         </Modal>

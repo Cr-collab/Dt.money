@@ -549,7 +549,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
                   export function TransactionTable(){
 
                       useEffect(()=>{
-                            fetch('http://localhost:3000/api/transaction')
+                            fetch('http://localhost:3000/api/transactions')
                             .then(response => response.json())
                             .then(data => {console.log(data)})
                             
@@ -570,7 +570,7 @@ Vamos começar  a  criar  nosso components , passo a passo:
                 routes(){
                   this.namespace = 'api'; // aqui vai inteceptar a rota que tiver api na sua url 
 
-                  this.get('/transaction', ()=>{// caso faça uma requisiçao get eu to reornando um array de objetos
+                  this.get('/transactions', ()=>{// caso faça uma requisiçao get eu to reornando um array de objetos
                     return [
                       {
                         id: 1,
@@ -998,6 +998,96 @@ export function NewTransactionModal({isOpen , onRequestClose} = NewTransactionMo
   )
 }
 ~~~
+
+-----------------------
+
+
+-----------------------------
+
+# Aula - Listando transações e seedes
+--------------------------------------------------
+## Index.tsx  / onde renderiza o o componentem app;
+-------------------------------------------------------
+~~~~javascript
+/* 
+  vai buscar todas as nossas transações da nossa api e listalas em tela ;
+  O que agente vai fazer agora , o banco de dados da nossa api no caso o mirage sempre vai comecar vazio, tem uma forma de deixar transaçãoes pre cadastradas 
+
+ */
+
+seeds(server){
+      
+     server.db.loadData({
+       transactions: [{
+         id:1,
+         title: 'Freelance de website',
+         type: 'deposit'
+         category: 'Dev',
+         amount: 6000,
+         createdAt: new Date('2021-02-12 09:00:00')
+
+       },{
+         id:2,
+         title: 'Aluguel',
+         type: 'withdraw',
+         categoru: 'Casa',
+         amount: 4000,
+         created: new Date('2021-04-12 11:00:00')
+
+       }]
+     })
+
+}
+
+
+~~~~
+
+-------------------------
+--------------------------------------------------
+## Index.tsx  / na pasta TransactionsTable ;
+-------------------------------------------------------
+
+~~~~javascript 
+ 
+ interface Transactions {
+            id: number;
+            title: string;
+            amount: number;
+            type: string;
+            category: string;
+            createdAt: string;
+ }
+
+const [transactions , setTransactions] = useState<Transactions[]>([]);
+
+  useEffect(()=>{ 
+    api.get('transactions')
+    .then(response => settransactions(response.data.transaction))
+  },[])
+
+
+  /* percorrer  as nossas informações */
+
+                               <tbody>
+
+                                 
+                                    {
+                                      transactions.map(transaction =>  (
+                                           <tr key={transaction.id}>
+
+                                            <td>{transaction.title }</td>
+                                            <td className={transaction.type}>{transaction.amount} </td>
+                                            <td >{transaction.category}</td>
+                                            <td>{transaction.createdAt}</td>
+
+                                            </tr>
+                                      ) )
+                                    }
+                               
+                                </tbody>
+
+~~~~
+
 
 
 

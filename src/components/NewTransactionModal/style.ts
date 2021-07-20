@@ -5,7 +5,7 @@ export const Container = styled.form`
 h2{ 
     color: var(--text-title);
     font-size: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
    input{ 
        width: 100%;
@@ -19,7 +19,7 @@ h2{
        font-size: 1rem;
 
        &::placeholder{
-           margin-top: 1rem;
+          color: var(--text-body);
        }
 
        & + input {
@@ -72,7 +72,7 @@ const color= {
 
 export const RadioBox = styled.button<RadioBoxProps>`
 
-height: 4rem;
+        height: 4rem;
         border:  1px solid #d7d7d7;
         border-radius:0.25rem;
         background: ${ (props)=> props.isActive ? 
