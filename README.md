@@ -1118,6 +1118,187 @@ const [transactions , setTransactions] = useState<Transactions[]>([]);
 
 ~~~~
 
+-------------------------------------------------
+# Introdução à contextos
+--------------------------------------
+* coisas que vamos utilizar no dia a dia para resolução de problemas;
+  * por exemplo repasse de propriedade quando tenha dois elememntos que precisam do mesmo conteudo , coloquamos o conteudo no componente pai para os dois terem acesso;
+
+* por que precisaremos utilizar contexto na nossa aplicação ? 
+ o exemplo da nossa aplicação, no caso sumary ele esta estatico e precisamos das informaçães da nossa transação , que estam no componente transaction table.
+ como conseguiremos passar essa informção pra o nosso sumary ? 
+
+ * atráves do repasse de propriedades , colocando as informções no nosso dashboard e passando os valores para a nossa transactionTabble e para nosso sumary.
+    * qual é o problema do repasse de propriedades ?
+      * tem coisas começam a perder o sentindo , se agente pessar que cada componente tem sua responsbilidade. O dashboard por exemplo fazer carregamento de transações não tem muito sentido, a transactionTable tem muito mais cara de fazer essa responsabildade de carregamento de transação.
+      * O outro problema é props drinling ->  passar uma propriedade varios niveis para baixo. 
+      nesse caso quando agente quiser passar uma informação que é um pouca mais complexa, geralmente agente vai usar contexto; 
+
+e qundo utilizar contexto na nossa aplicação ?
+
+
+* para que server contexto ? Compartilhamento de estado entre varios componentes da nossa aplicação independente onde ele esteja.
+
+-------------------------------------------------
+# A context API no React
+--------------------------------------
+* Primerio passo : Dentro da pasta src vamos criar um aquivo com nome TransactionContext.ts
+* Adiconar codigo dentro do arquivo TrasanctionContext.ts:
+~~~~javascript
+ 
+/* primeira coisa importar de dentreo do react uma função chamda createContext  */
+import { createContext } from 'react';
+
+export const TransactionContext = createContext([]); // valor padrão para inicializar 
+/* essa é a forma mais imples de criar um contexto no react */
+ 
+ /* Quando criamos um contexto podemos acessar em qualquer componnente da nossa aplicação, no
+ mais para que qualquer componnente tenha  acesso a nosso contexto pricisamos colocar nossos componentes em volta de um carinha chamdo provider*/
+~~~~
+* colocando o nosso contexto em volta do nosso componente app
+ * App.tsx
+ ~~~~javascript 
+
+return (
+  < TransactionContext.Provider value={[]} >
+  {// esse provider obrigatoriamente precisa receber um valor, que vai ser o valor atual do nosso contexto  }
+  {/* dentro do nosso fragment vai ficar nosso provider */}
+    < AquiFicaTodosNosoComponetes/>
+  </>
+)
+
+ ~~~~
+
+ * vamos no componente sumary para consumir nosso contexto, existe duas formar uma mais antifa e outra mais moderna .
+
+ * forma antiga de se consumir um Contexto ;
+ * Sumary.tsx
+ ~~~~javascript 
+
+<TransactionContext.Consumer>
+{(data)=>{   console.log(data);  return<p> Ok </p> }}{// essa função aqui vai receber os dados do nosso contexto}
+</TrasanctionContext.Consumer>
+// aqui o console.log  vai retornar o valor do nosso co contexto
+ ~~~~
+
+  * forma Nova de se consumir um Contexto ;
+ * Sumary.tsx
+ ~~~~javascript 
+
+ const data = useContext(TransactionContext);
+ console.log(data);
+
+~~~~
+-------------
+# Carregando transações
+-------------
+O que vamos fazer nessa aula é carregar a nossa lista de transações dentro do nosso contexto;
+
+* primeira forma;
+ * App.tsx
+ ~~~~javascript 
+
+ const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+ useEffect(()=>{ 
+   api.get('transaction')
+   .then(response => setTransactions(response.data.transactions))
+ }, [])
+
+return (
+  < TransactionContext.Provider value={trasactions} >
+  {// esse provider obrigatoriamente precisa receber um valor, que vai ser o valor atual do nosso contexto  }
+  {/* dentro do nosso fragment vai ficar nosso provider */}
+    < AquiFicaTodosNosoComponetes/>
+  </>
+)
+
+ ~~~~
+
+ A forma usada acima ela é um codigo mais complexo , se adicionarmos mais conxtexto o nosso arquivo app vai ficar grande alem de sem sentindo , ja por ter a modal é suficiente.
+
+ * segunda forma criando um componete para assumir a responsabildade de salvar as transações no contexto
+
+*  Primerio passo : Dentro da pasta src vamos atualizar o nosso arquivo TransactionContext.ts para extensão tsx
+* Adiconar codigo dentro do arquivo TrasanctionContext.ts:
+~~~~javascript
+ 
+/* primeira coisa importar de dentreo do react uma função chamda createContext  */
+import { createContext } from 'react';
+
+export const TransactionContext = createContext<Transaction[]>([]); // valor padrão para inicializar 
+/* essa é a forma mais imples de criar um contexto no react */
+ 
+ /* Quando criamos um contexto podemos acessar em qualquer componnente da nossa aplicação, no
+ mais para que qualquer componnente tenha  acesso a nosso contexto pricisamos colocar nossos componentes em volta de um carinha chamdo provider*/
+
+ interface Transaction {
+   id: number;
+   title: string;
+   amount: number;
+   type: string;
+   category: string;
+   createdAt: string;
+ }
+
+interface TransactionProviderProps{
+  children: ReactNode;
+}
+
+export function TransactionProvider({children} : TransactionProviderProps){
+  
+ const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+ useEffect(()=>{ 
+   api.get('transaction')
+   .then(response => setTransactions(response.data.transactions))
+ }, [])
+
+
+ return (
+    < TransactionContext.Provider value={transactions} >
+    {children}
+    </TransactionContext.Provider>
+
+ )
+
+}
+
+
+~~~~
+--------------------------------------------------------
+* App.tsx
+ ~~~~javascript 
+
+ const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+ useEffect(()=>{ 
+   api.get('transaction')
+   .then(response => setTransactions(response.data.transactions))
+ }, [])
+
+return (
+  <TransactionProvider>
+  {// esse provider obrigatoriamente precisa receber um valor, que vai ser o valor atual do nosso contexto  }
+  {/* dentro do nosso fragment vai ficar nosso provider */}
+    < AquiFicaTodosNosoComponetes/>
+  <TransactionProvider/>
+)
+
+ ~~~~
+
+
+
+
+
+
+
+
+    
+
+
+
+
 
 
 
