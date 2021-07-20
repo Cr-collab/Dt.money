@@ -1088,6 +1088,36 @@ const [transactions , setTransactions] = useState<Transactions[]>([]);
 
 ~~~~
 
+---------------------------------
+# Aula - Formatando valores
+--------------------
+
+## Index.tsx  / na pasta TransactionsTable ;
+-----------------------------------------------------------
+
+~~~~javascript 
+
+/* Tnato faz o valores vamos utilizar nessa aula uma biblioteca nativa do proprio browser e intl */ 
+
+/* convertendo o a amount que é  */
+
+ {
+   new Intl.NumberFormat('pt-BR', {
+     style:'currency', // formato de moeda 
+     currency: 'BRL' // tipo da moeda
+   }).format(trasanction.amount)
+ }
+/* convertendo o a createAt que é  */
+
+{
+  new Intl.DateTimeFormat('pt-BR').format(new Date(trasanction.createdAt))
+}
+
+
+
+
+~~~~
+
 
 
 
