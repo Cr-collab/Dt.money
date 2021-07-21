@@ -1369,6 +1369,80 @@ export function TransactionProvider({children} : TransactionProviderProps){
 
 ~~~~
 
+---------------------------
+# Aula  - Finalizando Inçersão
+-----------------------------------
+*primerio passo ao adicionar uma nova transação no nosso modal teremos que fechalo]
+   * vamos no new trasaction modal :
+   ~~~~javascript
+     {/* parta fechar o modal é só chamar o metodo onrequest close  no final da função handleCreateNewTransaction */}
+
+
+   onrequestClose();
+   ~~~~
+*segundo passo nós só deveremos fechalo se a inçersão der certo .
+
+  ~~~~javascript
+     {/* parta fechar o modal é só chamar o metodo onrequest close  no final da função handleCreateNewTransaction */}
+     
+     {/* na função handleCreateNewTransaction adicionar assync nela por que o assync é irmão siames do await */}
+    await createTransaction({
+       title,
+       amount,
+       category,
+       type
+     })
+
+     setTitle('')
+     setAmount(0)
+     setCategory('')
+     setType('deposit')
+     // resetando os valores do campos 
+    
+   onrequestClose();
+
+
+   /* vamos ter que nosso context para tranformala em uma função async */
+   
+ async function createTransaction(transaction: TransactionInput){
+
+                 await api.post('/transactions',transaction);
+ }
+
+ /*  Como toda função Assincrona no javascript retorna uma promessa em volta do voi vamos dizer que é uma prommise */
+
+ interface TransactionsContext {
+    transactions: Transaction[];
+    createdTransaction: (transaction: TransactionInput) => Promise<void>;
+
+}
+   ~~~~
+* terceiro passo adicionar a nossa inserção a nossa tabela.
+ * vamos no new trasaction Context :
+   ~~~~javascript
+     {/*  como mirage retorna para gente a resposta da transação que foi adicionada vamos pegala e colocal em uma variavel */}
+
+  async function createTransaction(transactionIpunt: TransactionInput){
+
+             const response =   await api.post('/transactions',{...transactionIpunt, createdAt: new Date()});
+             /// pegando a resposta da inserção
+
+             const { transaction } = response.data;
+             // o dado da nosso transação
+
+             //agora gente vai setar esse valor nosso estado 
+             setTransactions([
+               ...transactions,
+               transaction
+             ])
+  }
+   onrequestClose();
+   ~~~~
+
+ 
+
+
+
 
 
 
