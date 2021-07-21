@@ -7,7 +7,7 @@ import totalImg from "../../assets/total.svg";
  
 export function Sumary(){
 
-    const transactions = useContext(TransactionsContext)
+    const { transactions } = useContext(TransactionsContext)
     console.log(transactions)
 
     return(

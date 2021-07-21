@@ -1287,6 +1287,88 @@ return (
 
  ~~~~
 
+--------------------------------------
+# Movendo criação para o context
+--------------------------------------
+O que vamos fazer na nossa aplicação , se você perceber qunado cadastramos alguma transação algumas coisas não acontecem primerio a nossa tabela não é criada uma nova transação e nosso modal não fecha. mesmo que seja feita adição de uma nova transação no nossa api.
+mais agora como estamos utilizando o contexto agente consegue fazer que a nossa transação assim que cadastrada , apareça na nossa tabela , o que vamos fazer.
+* vamos na nossa NewTransactionModal e vamos importar o nosso useContext.
+* para podemos pegar as informações da nossa transação.
+   Para podermos colocar atualizar uma informção na nossa tabela , não precisaremos só do valor das nossas transações, para manter o respeito da imutabilidade do react agente precisa da funcionalida do hook para podemos setar um novo valor;
+* vamos pegar toda a logica da nossa criação de nova transação e vai passar par dentro do nosso contexto.   
+
+* Adiconar codigo dentro do arquivo TrasanctionContext.ts:
+~~~~javascript
+ 
+/* primeira coisa importar de dentreo do react uma função chamda createContext  */
+import { createContext } from 'react';
+
+export const TransactionContext = createContext<Transaction[]>([]); // valor padrão para inicializar 
+/* essa é a forma mais imples de criar um contexto no react */
+ 
+ /* Quando criamos um contexto podemos acessar em qualquer componnente da nossa aplicação, no
+ mais para que qualquer componnente tenha  acesso a nosso contexto pricisamos colocar nossos componentes em volta de um carinha chamdo provider*/
+
+ interface Transaction {
+   id: number;
+   title: string;
+   amount: number;
+   type: string;
+   category: string;
+   createdAt: string;
+ }
+
+ /* primeira forma a ser utilizada  */
+//  interface TransactionInput {
+//    title: string;
+//    amount: number;
+//    type: string;
+//    category: string;
+//  }
+
+// Segunda Forma 
+ type TransactionInput = Omit<Transaction , 'id'| 'createdAt'>;
+
+//  Terceira Forma 
+type TransactionInput = Pick<Transaction , "title"| "amount" |"type" |"category">
+
+interface TransactionsContext {
+    transactions: Transaction[];
+    createdTransaction: (transaction: TransactionInput) => void;
+
+}
+
+interface TransactionProviderProps{
+  children: ReactNode;
+}
+
+export function TransactionProvider({children} : TransactionProviderProps){
+  
+ const [transactions, setTransactions] = useState<TransactionsContext>({} as TransactionsContext);
+
+ useEffect(()=>{ 
+   api.get('transaction')
+   .then(response => setTransactions(response.data.transactions))
+ }, [])
+
+ function createTransaction(transaction: TransactionInput){
+
+                  api.post('/transactions',transaction);
+ }
+
+
+ return (
+    < TransactionContext.Provider value={{transactions, createTransaction }} >
+    {children}
+    </TransactionContext.Provider>
+
+ )
+
+}
+
+
+~~~~
+
 
 
 
