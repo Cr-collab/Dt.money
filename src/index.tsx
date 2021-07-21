@@ -14,16 +14,16 @@ createServer({
          server.db.loadData({
            transactions: [{
              id: 1,
-             title: 'Desenvolvimento de website',
+             title: 'Salario',
              type: 'deposit',
-             amount: 120000,
-             category: 'Dev',
+             amount: 1500,
+             category: 'Trabalho',
              createdAt: new Date('2021-02-12 09:00:00')
            },{
             id: 2,
             title: 'Aluguel',
             type: 'withdraw',
-            amount: 5000,
+            amount: 550,
             category: 'Casa',
             createdAt: new Date('2021-01-12 11:00:00')
           }]
