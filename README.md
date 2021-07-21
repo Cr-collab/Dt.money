@@ -1438,6 +1438,72 @@ export function TransactionProvider({children} : TransactionProviderProps){
   }
    onrequestClose();
    ~~~~
+   ---------------------------
+   # aula - Calculando resumo
+   ---------------------------------
+
+   Para fechar com chave de ouro falta agente precisa  calcular esses totais  no sumary
+
+   -------------------
+   ~~~~javascript
+
+   {/* vamos no sumary criar esses totais */} ]
+
+   {/* Primeira forma de fazer isso gardando em très variavel */}
+
+    const totalDeposits = transactions.reduce((acc , transaction)=>{ 
+               
+               if(transaction.type === 'deposit' ){
+                  return acc + transaction.amount;
+               }
+
+     }, 0)     
+
+    {/*Segunda forma colocando o nosso acumalator e os valores como três objeto e fazer de uma vez */}
+
+      const sumary = transactions.reduce((acc , transaction)=>{ 
+               
+               if(transaction.type === 'deposit' ){
+                   acc.deposit += transaction.amount
+                   acc.total += acc.deposit
+               }else{
+                  acc.withdraw += transaction.amount
+                  acc.total  -= acc.withdraw
+               } 
+
+               return acc
+
+     }, {
+       deposit : 0,
+       withdraw: 0,
+       total: 0
+     })   
+
+   ~~~~
+   -----------------------------------------
+   # aula - Criando hook
+   -------------------------------------
+   Nessa aula nosso objetivo criar nosso proprio hook ,  por que  ? toda vez que agente precisa usar o nosso Contexto agente importa o TransactionContext e useContext podemos melhorar isso.
+
+   * criar uma pasta em src em hook 
+   * dentro da pasta hook vai receber nosso  TransactionContext
+   * vamos renomear a nossa TransactionContext para useTransanctions
+   * e dentro dessa pasta vamos adicionar um codigo :
+   ~~~~javascript 
+ 
+     export function useTransaction() {
+                 
+     {/* Um hook no react pode utilizar de outros hooks */} 
+
+     const context =  useContext(TransactionContext)
+
+     return context
+
+     }
+
+   ~~~~
+
+
 
  
 

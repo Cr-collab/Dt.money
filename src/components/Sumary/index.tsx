@@ -1,13 +1,12 @@
 import {Container} from "./style";
-import { TransactionsContext } from "../../TransactionsContext";
-import { useContext } from "react";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
 import totalImg from "../../assets/total.svg";
+import { useTransaction } from "../hooks/useTransactions";
  
 export function Sumary(){
 
-    const { transactions } = useContext(TransactionsContext)
+    const { transactions } = useTransaction()
    
 
      const sumary = transactions.reduce((acc, transaction)=>{
@@ -46,7 +45,7 @@ export function Sumary(){
              {/*  */}
              <div className="highlight-background">
                  <header>
-                     <p>Entrada</p>
+                     <p>Total</p>
                      <img src={totalImg} alt="Total" />
                  </header>
                  <strong>
@@ -55,4 +54,8 @@ export function Sumary(){
              </div>
         </Container>
     )
+}
+
+function useTransactions(): { transactions: any; } {
+    throw new Error("Function not implemented.");
 }
